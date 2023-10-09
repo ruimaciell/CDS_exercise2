@@ -20,9 +20,9 @@ def car_at_light(light):
     elif light == "yellow":
         return "wait"
     else:
-        raise Exception("Undefined instruction for color: {}".format(light))
+        raise Exception(f'Undefined instruction for color: {light}')
 
-car_at_light("blue")
+car_at_light("gold")
 
 # 2)
 # Create a function named "safe_subtract" that
@@ -35,9 +35,10 @@ car_at_light("blue")
 
 def safe_subtract(a, b):
     try:
-        return b-a
+        return a - b
     except TypeError:
         print("None")
+   
 
 June=(10,90)
 safe_subtract(June,231)
@@ -60,24 +61,28 @@ Janet= {'name': 'Janet', 'last_name': 'Bird', 'gender': 'female'}
 import datetime
 year = datetime.datetime.today().year
 
-def retrieve_age_eafp(person):
+# this is lbyl
+def retrieve_age_lbyl(person):
     if 'birth' in person:
         return year - person['birth']
     else: 
         print("There is something wrong with your input.")
 
-
-def retrieve_age_lbyl(person):
+# This is eafp
+def retrieve_age_eafp(person):
     try:
         return year - person['birth']
     except KeyError:
         print("Looks like the key 'birth' is not in your dictionary.")
+    except TypeError:
+        print("Tadam")
+
+#Outputs
+retrieve_age_lbyl(John)
+retrieve_age_lbyl(Janet)
 
 retrieve_age_eafp(John)
 retrieve_age_eafp(Janet)
-
-retrieve_age_lbyl(John)
-retrieve_age_lbyl(Janet)
 
 # 4)
 # Imagine you have a file named data.csv. 
@@ -87,14 +92,14 @@ retrieve_age_lbyl(Janet)
 #
 
 
-def read_data():
+def read_data(csv):
     try:
-        with open("data.csv", "r") as f:
+        with open(csv, "r") as f:
             return f.read()
     except FileNotFoundError:
         print("The file does not exist.")
 
-read_data("asdasd:)
+read_data("asdasd")
 
 
 # 5) Squash some bugs! 
@@ -109,7 +114,7 @@ for elem in [10, 5, 2]:
 
 print(total_double_sum)
 
-'''Rui's comment: In order to print the total_double_sum, in the last line of code, you need to refer to the object double after the +=, not elem. If the code,
+'''In order to print the total_double_sum, in the last line of code, you need to refer to the object double after the +=, not elem. If the code,
 doesn't change it only prints the sum of the elements (17) not its double (34).
 Thus our suggestion for the code would be:'''
 
@@ -125,20 +130,22 @@ print(total_double_sum)
 
 strings = ''
 for string in ['I', 'am', 'Groot']:
-    strings = strings+"_"+string
-
+    strings = string+"_"+string
 print(strings)
-
     
-'''Rui's comment: There is a problem with the code if the goal is to put a underscore between each word. This code would only put the underscore between the last two words. Furthermore, it would also put an underscore at the beginning of the string.
+'''There is a problem with the code if the goal is to put a underscore between each word. This code only prints the two last elements of the given list. 
+Then, if we correct it we would need not to add the underscore before the first element of the list.
  There are two ways of solving it.
 First it would be to change the code by saying that if the list is empty, just add the word, and if it is not, add the underscore and the word.
-# strings = '''
+'''
+strings = ''
 for string in ['I', 'am', 'Groot']:
     if strings == '':
         strings += string
     else:
         strings += "_"+ string
+
+print(strings)
 ''' Second it would be to go through the list and add the underscore after the word except the last one.'''
 strings = ''
 for string in ['I', 'am', 'Groot']:
@@ -154,7 +161,7 @@ j=10
 while j > 0:
    j += 1
 
-'''Rui's comment:
+'''
  This code is going to run forever because j is always going to be greater than 0, if you are just adding 1 to it.
  If you want to run the code until it is above 0, you could put j-=1 inside the while loop, and it would finish when it hits 0.
  If you want to run the code until it is 10, you change j to 0 and put j+=1 inside the while loop.
@@ -162,17 +169,23 @@ Our suggestion would be to change the code to:'''
 j=10
 while j > 0:
    j -= 1
+   print(j)
+
+j=0
+while j < 10:
+   j += 1
+   print(j)
 
 ### (d)
 productory = 0
 for elem in [1, 5, 25]:
     productory *= elem
+print(productory)
 
-'''Rui's comment: # If you want to use productory and multiply it by the elements in the list, you should start with productory = 1, not 0. 
+'''If you want to use productory and multiply it by the elements in the list, you should start with productory = 1, not 0. 
 Otherwise, the result will always be 0 as the product of any number times 0 is 0.
-You could also create a list named productory and append the productory of the elements in the list, but that would be a different approach and would take a more code.
 One way to do it would be: '''
 productory = 1
 for elem in [1, 5, 25]:
     productory *= elem
-
+print(productory)
